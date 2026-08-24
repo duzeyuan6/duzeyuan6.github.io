@@ -2,7 +2,7 @@
   'use strict';
   const $=id=>document.getElementById(id);
   const frame=$('sitePreview'),frameWrap=$('frameWrap'),toastEl=$('toast');
-  const controls={text:$('textEditor'),font:$('elementFontSize'),radius:$('elementRadius'),color:$('elementColor'),background:$('elementBackground'),padding:$('elementPadding'),margin:$('elementMargin'),align:$('elementAlign')};
+  const controls={text:$('textEditor'),font:$('elementFontSize'),radius:$('elementRadius'),color:$('elementColor'),background:$('elementBackground'),padding:$('elementPadding'),margin:$('elementMargin'),align:$('elementAlign'),layout:$('elementLayout'),gap:$('elementGap'),columns:$('elementColumns')};
   const rangeMap={maxWidth:['maxWidthOutput','px'],sidebarWidth:['sidebarWidthOutput','px'],sectionGap:['sectionGapOutput','px'],cardRadius:['cardRadiusOutput','px'],heroSize:['heroSizeOutput','px'],photoRadius:['photoRadiusOutput','px']};
   const draftKey='dzy-visual-editor-draft-v1';
   const markerStart='/* VISUAL_EDITOR_OVERRIDES_START */',markerEnd='/* VISUAL_EDITOR_OVERRIDES_END */';
@@ -16,8 +16,8 @@
 
   function generatedCss(){
     const vars=Object.entries(overrides.variables||{}).map(([k,v])=>`${k}:${escapeCss(v)}`).join(';');
-    const width=overrides.maxWidth||1180,side=overrides.sidebarWidth||315,gap=overrides.sectionGap||70,radius=overrides.cardRadius||16,hero=overrides.heroSize||43,photo=overrides.photoRadius||36;
-    return `${markerStart}\n[data-theme="dark"]{${vars}}\n.wrapper,.nav-container{max-width:${width}px}\n@media(min-width:981px){.sidebar{width:${side}px}.content{width:calc(100% - ${side}px);margin-left:${side}px}}\n.section{margin-bottom:${gap}px}.info-card,.project-card{border-radius:${radius}px}.hero h2{font-size:${hero}px}.profile-photo{border-radius:${photo}px}\n${markerEnd}`;
+    const width=overrides.maxWidth||1180,side=overrides.sidebarWidth||315,gap=overrides.sectionGap||70,radius=overrides.cardRadius||16,hero=overrides.heroSize||43,photo=overrides.photoRadius||36,educationColumns=overrides.educationColumns||1,projectColumns=overrides.projectColumns||1;
+    return `${markerStart}\n[data-theme="dark"]{${vars}}\n.wrapper,.nav-container{max-width:${width}px}\n@media(min-width:981px){.sidebar{width:${side}px}.content{width:calc(100% - ${side}px);margin-left:${side}px}}\n.section{margin-bottom:${gap}px}.info-card,.project-card{border-radius:${radius}px}.hero h2{font-size:${hero}px}.profile-photo{border-radius:${photo}px}\n@media(min-width:681px){.education-grid{grid-template-columns:repeat(${educationColumns},minmax(0,1fr))}.project-grid{grid-template-columns:repeat(${projectColumns},minmax(0,1fr))}.info-card,.info-card:first-child,.project-card,.project-card:last-child{grid-column:auto}}\n${markerEnd}`;
   }
   function runtimeCss(){return `
     ${generatedCss()}
@@ -68,31 +68,46 @@
     updateSelectionPanel();
   }
   function elementPath(el){if(!el)return '';const parts=[];let node=el;while(node&&node!==frameDoc.body){let part=node.tagName.toLowerCase();if(node.id)part+='#'+node.id;else if(node.classList.length)part+='.'+[...node.classList].filter(x=>x!=='editor-selected').slice(0,2).join('.');parts.unshift(part);node=node.parentElement}return parts.join(' › ')}
+  function textBinding(el){
+    if(!el||el.tagName==='IMG')return {mode:'disabled',value:''};
+    if(el.children.length===0)return {mode:'all',value:el.textContent.trim()};
+    const direct=[...el.childNodes].filter(node=>node.nodeType===3&&node.nodeValue.trim());
+    const inline=[...el.children].every(child=>['SPAN','STRONG','EM','B','I','BR'].includes(child.tagName));
+    if(inline&&el.children.length===1&&direct.length===1)return {mode:'direct',node:direct[0],value:direct[0].nodeValue.trim()};
+    return {mode:'disabled',value:''};
+  }
+  function gridColumnCount(style){if(style.display!=='grid'||!style.gridTemplateColumns||style.gridTemplateColumns==='none')return 2;return Math.max(1,style.gridTemplateColumns.split(' ').length)}
   function updateSelectionPanel(){
     const empty=$('selectionEmpty'),panel=$('selectionControls');
     if(!selected||!frameDoc?.contains(selected)){empty.hidden=false;panel.hidden=true;return}
     empty.hidden=true;panel.hidden=false;$('selectedPath').textContent=elementPath(selected);
-    const hasStructuredChildren=[...selected.children].some(child=>!['BR'].includes(child.tagName));
-    controls.text.disabled=selected.tagName==='IMG'||hasStructuredChildren;controls.text.value=controls.text.disabled?'':selected.textContent.trim();controls.text.placeholder=controls.text.disabled?'该元素包含子元素，请点击内部文字':'输入文字内容';
+    const binding=textBinding(selected);selected._editorTextBinding=binding;
+    controls.text.disabled=binding.mode==='disabled';controls.text.value=binding.value;controls.text.placeholder=controls.text.disabled?'该元素包含多个内容块，请点击内部文字':'输入文字内容';
     const style=frame.contentWindow.getComputedStyle(selected);controls.font.value=pxNumber(style.fontSize);controls.radius.value=pxNumber(style.borderRadius);controls.color.value=toHex(style.color);controls.background.value=toHex(style.backgroundColor,'#0b2038');controls.padding.value=pxNumber(style.paddingTop);controls.margin.value=pxNumber(style.marginTop);controls.align.value=['left','center','right'].includes(style.textAlign)?style.textAlign:'';
+    controls.layout.value=style.display==='grid'?'grid':style.display==='flex'?(style.flexDirection==='column'?'column':'row'):'';controls.gap.value=pxNumber(style.gap);controls.columns.value=gridColumnCount(style);
     $('toggleVisibility').textContent=selected.dataset.editorHidden==='true'?'显示':'隐藏';
   }
 
   function setStyle(property,value,unit=''){if(!selected)return;selected.style[property]=value===''?'':value+unit;scheduleHistory()}
-  controls.text.addEventListener('input',()=>{if(selected&&!controls.text.disabled){selected.textContent=controls.text.value;scheduleHistory()}});
+  controls.text.addEventListener('input',()=>{if(!selected||controls.text.disabled)return;const binding=selected._editorTextBinding;if(binding.mode==='all')selected.textContent=controls.text.value;else if(binding.mode==='direct'){const leading=binding.node.nodeValue.match(/^\s*/)?.[0]||'';const trailing=binding.node.nodeValue.match(/\s*$/)?.[0]||'';binding.node.nodeValue=leading+controls.text.value+trailing}scheduleHistory()});
   controls.font.addEventListener('input',()=>setStyle('fontSize',controls.font.value,'px'));controls.radius.addEventListener('input',()=>setStyle('borderRadius',controls.radius.value,'px'));
   controls.color.addEventListener('input',()=>setStyle('color',controls.color.value));controls.background.addEventListener('input',()=>setStyle('backgroundColor',controls.background.value));
   controls.padding.addEventListener('input',()=>setStyle('padding',controls.padding.value,'px'));controls.margin.addEventListener('input',()=>setStyle('margin',controls.margin.value,'px'));controls.align.addEventListener('change',()=>setStyle('textAlign',controls.align.value));
+  controls.layout.addEventListener('change',()=>{if(!selected)return;const value=controls.layout.value;if(!value){selected.style.display='';selected.style.flexDirection='';selected.style.flexWrap='';selected.style.gridTemplateColumns=''}else if(value==='grid'){selected.style.display='grid';selected.style.flexDirection='';selected.style.flexWrap='';selected.style.gridTemplateColumns=`repeat(${controls.columns.value||2}, minmax(0, 1fr))`}else{selected.style.display='flex';selected.style.flexDirection=value;selected.style.flexWrap=value==='row'?'wrap':'';selected.style.gridTemplateColumns=''}scheduleHistory()});
+  controls.gap.addEventListener('input',()=>setStyle('gap',controls.gap.value,'px'));controls.columns.addEventListener('input',()=>{if(selected&&controls.layout.value==='grid')setStyle('gridTemplateColumns',`repeat(${controls.columns.value||2}, minmax(0, 1fr))`)});
   $('clearInlineStyles').addEventListener('click',()=>{if(!selected)return;selected.removeAttribute('style');selected.removeAttribute('data-editor-hidden');applyRuntimeCss();updateSelectionPanel();pushHistory();toast('已清除自定义样式')});
   $('toggleVisibility').addEventListener('click',()=>{if(!selected)return;const hidden=selected.dataset.editorHidden!=='true';selected.dataset.editorHidden=String(hidden);selected.style.display=hidden?'none':'';$('toggleVisibility').textContent=hidden?'显示':'隐藏';pushHistory()});
   function moveSelected(direction){if(!selected)return;const parent=selected.parentElement;if(direction<0&&selected.previousElementSibling)parent.insertBefore(selected,selected.previousElementSibling);if(direction>0&&selected.nextElementSibling)parent.insertBefore(selected.nextElementSibling,selected);pushHistory();selected.scrollIntoView({block:'nearest'})}
   $('moveUp').addEventListener('click',()=>moveSelected(-1));$('moveDown').addEventListener('click',()=>moveSelected(1));
+  $('selectParent').addEventListener('click',()=>{if(selected?.parentElement&&selected.parentElement!==frameDoc.body)selectElement(selected.parentElement)});
 
   document.querySelectorAll('[data-variable]').forEach(input=>input.addEventListener('input',()=>{overrides.variables=overrides.variables||{};overrides.variables[input.dataset.variable]=input.value;applyRuntimeCss();scheduleHistory()}));
+  ['educationColumns','projectColumns'].forEach(id=>$(id).addEventListener('change',()=>{overrides[id]=Number($(id).value);applyRuntimeCss();pushHistory()}));
   Object.keys(rangeMap).forEach(id=>{$(id).addEventListener('input',()=>{overrides[id]=Number($(id).value);$(rangeMap[id][0]).textContent=$(id).value+rangeMap[id][1];applyRuntimeCss();scheduleHistory()})});
   function syncGlobalControls(){
     document.querySelectorAll('[data-variable]').forEach(input=>{if(overrides.variables?.[input.dataset.variable])input.value=overrides.variables[input.dataset.variable]});
-    Object.keys(rangeMap).forEach(id=>{if(overrides[id]!=null)$(id).value=overrides[id];$(rangeMap[id][0]).textContent=$(id).value+rangeMap[id][1]});applyRuntimeCss()
+    Object.keys(rangeMap).forEach(id=>{if(overrides[id]!=null)$(id).value=overrides[id];$(rangeMap[id][0]).textContent=$(id).value+rangeMap[id][1]});
+    ['educationColumns','projectColumns'].forEach(id=>{$(id).value=String(overrides[id]||1)});applyRuntimeCss()
   }
 
   document.querySelectorAll('.viewport-button').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('.viewport-button').forEach(x=>x.classList.remove('active'));button.classList.add('active');frameWrap.style.width=button.dataset.width;$('previewWidthLabel').textContent=button.dataset.width==='100%'?'自适应桌面':button.dataset.width}));
