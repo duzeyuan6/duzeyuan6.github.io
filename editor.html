@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>DZY Visual Editor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/editor.css">
+  <script src="assets/js/editor.js" defer></script>
+</head>
+<body>
+  <header class="editor-topbar">
+    <div class="editor-brand"><span class="brand-mark">D</span><div><strong>DZY Visual Editor</strong><small>个人主页可视化编辑器</small></div></div>
+    <div class="topbar-center" role="group" aria-label="预览尺寸">
+      <button class="icon-button viewport-button active" data-width="100%" title="桌面预览">桌面</button>
+      <button class="icon-button viewport-button" data-width="820px" title="平板预览">平板</button>
+      <button class="icon-button viewport-button" data-width="390px" title="手机预览">手机</button>
+      <span class="toolbar-divider"></span>
+      <button class="icon-button" id="previewTheme" title="切换预览明暗模式">明暗</button>
+    </div>
+    <div class="topbar-actions">
+      <button class="icon-button" id="undoButton" disabled>撤销</button>
+      <button class="icon-button" id="redoButton" disabled>重做</button>
+      <button class="primary-button" id="saveButton">保存到项目</button>
+    </div>
+  </header>
+
+  <main class="editor-shell">
+    <aside class="control-panel">
+      <section class="panel-intro">
+        <div class="status-row"><span class="status-dot" id="connectionDot"></span><span id="connectionText">尚未连接本地项目</span></div>
+        <p>先连接 <code>D:\duzeyuan6.github.io</code>，再点击右侧预览中的文字、照片、卡片或区块进行修改。</p>
+        <button class="secondary-button full-width" id="connectButton">连接本地项目文件夹</button>
+      </section>
+
+      <details open>
+        <summary>全局外观</summary>
+        <div class="control-grid color-grid">
+          <label>背景色<input type="color" data-variable="--bg" value="#061426"></label>
+          <label>卡片色<input type="color" data-variable="--surface" value="#0b2038"></label>
+          <label>文字色<input type="color" data-variable="--text" value="#edf6ff"></label>
+          <label>强调色<input type="color" data-variable="--accent" value="#62bdf2"></label>
+          <label>高亮色<input type="color" data-variable="--bright" value="#8dd5ff"></label>
+          <label>辅助文字<input type="color" data-variable="--muted" value="#9fb2c8"></label>
+        </div>
+        <label class="range-control"><span>页面宽度 <output id="maxWidthOutput">1180px</output></span><input id="maxWidth" type="range" min="900" max="1500" step="10" value="1180"></label>
+        <label class="range-control"><span>侧栏宽度 <output id="sidebarWidthOutput">315px</output></span><input id="sidebarWidth" type="range" min="240" max="430" step="5" value="315"></label>
+        <label class="range-control"><span>区块间距 <output id="sectionGapOutput">70px</output></span><input id="sectionGap" type="range" min="24" max="120" step="2" value="70"></label>
+        <label class="range-control"><span>卡片圆角 <output id="cardRadiusOutput">16px</output></span><input id="cardRadius" type="range" min="0" max="40" step="1" value="16"></label>
+        <label class="range-control"><span>首屏标题 <output id="heroSizeOutput">43px</output></span><input id="heroSize" type="range" min="28" max="68" step="1" value="43"></label>
+        <label class="range-control"><span>照片圆角 <output id="photoRadiusOutput">36px</output></span><input id="photoRadius" type="range" min="0" max="86" step="1" value="36"></label>
+      </details>
+
+      <details open>
+        <summary>当前选中元素</summary>
+        <div class="selection-empty" id="selectionEmpty">在右侧预览中点击一个元素</div>
+        <div class="selection-controls" id="selectionControls" hidden>
+          <div class="selected-path" id="selectedPath"></div>
+          <label>文字内容<textarea id="textEditor" rows="5" placeholder="选中纯文字元素后可编辑"></textarea></label>
+          <div class="control-grid">
+            <label>字号<input id="elementFontSize" type="number" min="8" max="120" placeholder="自动"></label>
+            <label>圆角<input id="elementRadius" type="number" min="0" max="120" placeholder="自动"></label>
+            <label>文字颜色<input id="elementColor" type="color" value="#edf6ff"></label>
+            <label>背景颜色<input id="elementBackground" type="color" value="#0b2038"></label>
+            <label>内边距<input id="elementPadding" type="number" min="0" max="160" placeholder="自动"></label>
+            <label>外边距<input id="elementMargin" type="number" min="0" max="160" placeholder="自动"></label>
+          </div>
+          <label>对齐方式<select id="elementAlign"><option value="">保持原样</option><option value="left">左对齐</option><option value="center">居中</option><option value="right">右对齐</option></select></label>
+          <div class="button-row"><button class="secondary-button" id="moveUp">上移</button><button class="secondary-button" id="moveDown">下移</button><button class="secondary-button" id="toggleVisibility">隐藏</button></div>
+          <button class="ghost-button full-width" id="clearInlineStyles">清除该元素自定义样式</button>
+        </div>
+      </details>
+
+      <details>
+        <summary>照片与文件</summary>
+        <label class="file-button">替换个人照片<input type="file" id="photoInput" accept="image/png,image/jpeg,image/webp"></label>
+        <p class="helper-text">连接本地项目后，照片会保存为 <code>assets/img/profile-photo.jpg</code>。</p>
+      </details>
+
+      <details>
+        <summary>保存与导出</summary>
+        <div class="button-stack">
+          <button class="secondary-button" id="saveDraft">保存浏览器草稿</button>
+          <button class="secondary-button" id="exportHtml">下载 index.html</button>
+          <button class="secondary-button" id="exportCss">下载样式补丁 CSS</button>
+          <button class="danger-button" id="resetButton">放弃草稿并重新载入</button>
+        </div>
+        <p class="helper-text">“保存到项目”只修改你选择的本地文件夹，不会接触 GitHub 密钥。保存后仍需提交并推送。</p>
+      </details>
+    </aside>
+
+    <section class="preview-area">
+      <div class="preview-note"><span>点击元素进行选择</span><span id="previewWidthLabel">自适应桌面</span></div>
+      <div class="preview-stage"><div class="preview-frame-wrap" id="frameWrap"><iframe id="sitePreview" src="index.html?visual-editor=1" title="个人主页实时预览"></iframe></div></div>
+    </section>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
