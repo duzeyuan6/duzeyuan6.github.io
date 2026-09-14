@@ -47,11 +47,19 @@ education:
     B.A. in Philosophy
   date: '<span style="margin-right: 8px;"> Aug. 2022 - Jun. 2026</span>'
 
-# experience:
-# - name: Peking University
-#   logo: /assets/images/badges/PKU_red.png
-#   position: Research Intern
-#   date: Sep. 2019 - Jul. 2021
+experience:
+- name: University of Florida
+  position: >-
+    Remote Research Assistant · Language and Multimodal Intelligence Lab <br/>
+    Advisor: Prof. Yuanyuan Lei
+  date: Sep. 2026 - Present
+
+- name: RIL Lab
+  position: >-
+    Research Intern ·
+    <a href="https://ril-lab.top/" target="_blank">RIL Lab</a> <br/>
+    Advisor: Prof. Qiang Nie
+  date: Jun. 2026 - Sep. 2026
 
 awards:
 - name: Award Name 2
