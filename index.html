@@ -20,6 +20,10 @@ navbar_title: Home
             {% include widgets/experience_card.html %}
         {% endif %}
 
+        {% if site.data.research_experience %}
+            {% include widgets/research_experience_card.html %}
+        {% endif %}
+
         {% if site.data.display.homepage.show_news %}
         {% assign count_news = site.news | size %}
         {% if count_news > 0 %}
