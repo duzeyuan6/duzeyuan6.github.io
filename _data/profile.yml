@@ -41,10 +41,9 @@ education:
   date: Oct. 2026 - Present
 
 - name: Nankai University
-  logo: assets/images/badges/nankai.jpg
+  logo: /assets/images/badges/nankai.jpg
   position: >-
-    B.Eng. in Automation ·
-    <a href="https://url.nankai.edu.cn/" target="_blank">Underactuated Robotics Lab</a> <br/>
+    <span style="white-space: nowrap;">B.Eng. in Automation · <a href="https://url.nankai.edu.cn/" target="_blank">Underactuated Robotics Lab</a></span><br/>
     B.A. in Philosophy
   date: Sep. 2021 - Jun. 2026
 
