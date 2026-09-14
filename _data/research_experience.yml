@@ -1,0 +1,29 @@
+- title: Brain-inspired SNN-CPG Control Framework With STDP Learning
+  advisor: Prof. Qingxiang Wu
+  description: >-
+    Developed a bio-inspired SNN-CPG framework with STDP learning for adaptive locomotion
+    and obstacle avoidance in untethered soft robots.
+
+- title: Untethered Hydraulically Driven Soft Crawling Robot
+  advisor: Prof. Qingxiang Wu
+  description: >-
+    Developed an untethered hydraulically driven soft crawling robot with soft actuator
+    modeling, prototype fabrication, and experimental validation.
+
+- title: Canine-Inspired Emotional Motion Generation for Quadruped Robots
+  advisor: Prof. Qiang Nie
+  description: >-
+    Developed a 3D canine expressive space and transferred learned motion characteristics
+    to Unitree Go2 for expressive quadruped behaviors.
+
+- title: Learning-Based Robot Boxing and Interactive Control
+  advisor: Prof. Qiang Nie
+  description: >-
+    Developed learning-based robot boxing and opponent-interaction behaviors from
+    human motion data in physics-based simulation.
+
+- title: Spike-Based Efficient Image Reconstruction with Spiking Neural Networks
+  advisor: Prof. Qiang Nie
+  description: >-
+    Developed an SNN-based image reconstruction framework for efficient visual
+    representation using sparse spiking computation.
