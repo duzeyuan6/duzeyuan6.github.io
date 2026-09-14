@@ -23,8 +23,8 @@ short_bio: >-
     I received my B.Eng. in Automation and B.A. in Philosophy from Nankai University.
   </p>
   <p>
-    My research interests include vision-language-action models, soft robotics
-    robotics, spiking neural networks , and brain-inspired control.
+    My research interests include vision-language-action models, soft robotics, 
+    spiking neural networks , and brain-inspired control.
   </p>
 
 portrait_url: /assets/images/photos/portrait.jpg
@@ -32,16 +32,20 @@ portrait_caption: >-
   Photo by Manja Vitolic on Unsplash (this caption is optional, comment it out to disable).
 
 education:
-- name: Massachusetts Institute of Technology
-  logo: /assets/images/badges/MIT_Social_circle.png
-  position: >- 
-    Department of Electrical Engineering and Computer Science <br/>
-    Ph.D. Student
-  date: Sep. 2024 - present
-- name: Peking University
-  logo: /assets/images/badges/PKU_red.png
-  position: B.S. in Computer Science
-  date: Sep. 2019 - Jul. 2021
+- name: Tohoku University
+  logo:
+  position: >-
+    Graduate School of Engineering <br/>
+    M.S. Student ·
+    <a href="https://neuro.mech.tohoku.ac.jp/" target="_blank">Neuro-Robotics Lab</a>
+  date: Oct. 2026 - Present
+
+- name: Nankai University
+  position: >-
+    B.Eng. in Automation ·
+    <a href="https://url.nankai.edu.cn/" target="_blank">Underactuated Robotics Lab</a> <br/>
+    B.A. in Philosophy
+  date: Sep. 2021 - Jun. 2026
 
 # experience:
 # - name: Peking University
