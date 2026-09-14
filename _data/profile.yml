@@ -33,7 +33,7 @@ portrait_caption: >-
 
 education:
 - name: Tohoku University
-  logo:
+  logo: /assets/images/badges/tohoku.png
   position: >-
     Graduate School of Engineering <br/>
     M.S. Student ·
@@ -41,6 +41,7 @@ education:
   date: Oct. 2026 - Present
 
 - name: Nankai University
+  logo: /assets/images/badges/nankai.jpg
   position: >-
     B.Eng. in Automation ·
     <a href="https://url.nankai.edu.cn/" target="_blank">Underactuated Robotics Lab</a> <br/>
