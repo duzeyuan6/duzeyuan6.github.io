@@ -49,15 +49,16 @@ education:
 
 experience:
 - name: University of Florida
+  logo: /assets/images/badges/ufl.jpg
   position: >-
-    Remote Research Assistant · Language and Multimodal Intelligence Lab <br/>
-    Advisor: Prof. Yuanyuan Lei
-  date: Sep. 2026 - Present
+    Remote Research Assistant <br/>
+    Language and Multimodal Intelligence Lab · Prof. Yuanyuan Lei
+  date: Oct. 2026 - Present
 
-- name: RIL Lab
+- name: The Hong Kong University of Science and Technology (Guangzhou)
+  logo: /assets/images/badges/hkust-gz.png
   position: >-
-    Research Intern ·
-    <a href="https://ril-lab.top/" target="_blank">RIL Lab</a> <br/>
+    Research Intern · <a href="https://ril-lab.top/" target="_blank">RIL Lab</a> <br/>
     Advisor: Prof. Qiang Nie
   date: Jun. 2026 - Sep. 2026
 
