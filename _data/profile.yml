@@ -3,9 +3,9 @@ secondary_name: ""
 navbar_name: "Du Zeyuan"
 
 positions:
-- name: Title or Position
-- name: Affiliation Name
-  logo: /assets/images/badges/MIT_Social_circle.png  # Logo is optional
+- name: M.Eng. Student
+- name: Tohoku University
+ # logo: /assets/images/badges/MIT_Social_circle.png  # Logo is optional
 
 
 email: "duzeyuan6@gmail.com"
