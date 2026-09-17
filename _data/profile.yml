@@ -19,14 +19,21 @@ gscholar: R5-yf-AAAAAJ
 short_bio_text_justify: false
 short_bio: >-
   <p>
-    I am an incoming master's student at Tohoku University.
-    I received my B.Eng. in Automation and B.A. in Philosophy from Nankai University.
+    I am currently pursuing a master's degree in Robotics at the Graduate School of Engineering, 
+    Tohoku University, where I conduct research at the Neuro-Robotics Lab.
+    Prior to this, I received my B.Eng. in Automation and B.A. in Philosophy from Nankai University.
   </p>
   <p>
-    My research interests include vision-language-action models, soft robotics, 
-    spiking neural networks , and brain-inspired control.
+    In addition to my academic training, I am a remote Research Assistant at the 
+    Language and Multimodal Intelligence Lab, University of Florida.
+    Previously, I worked as a visiting Research Assistant at the Robotics and Intelligent Systems Lab, 
+    HKUST(GZ).
   </p>
-
+  <p>
+    My research interests include robotics, embodied intelligence, human-robot interaction, 
+    vision-language-action models, soft robotics, spiking neural networks, and brain-inspired control.
+  </p>
+  
 portrait_url: /assets/images/photos/portrait.jpg
 
 
