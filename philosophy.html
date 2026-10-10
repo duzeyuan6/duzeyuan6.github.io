@@ -3,30 +3,45 @@ layout: default
 title: Philosophy
 navbar_title: Philosophy
 permalink: /philosophy/
-body_attr: >-
-  data-spy="scroll" data-target="#navbar-year" data-offset="100"
+stylesheet: /assets/css/philosophy.css
+body_attr: 'data-page="philosophy"'
 ---
 
 {% assign talks_by_year = site.data.philosophy | sort: "date" | reverse | group_by_exp: "item", "item.date | date: '%Y'" %}
 
-<div class="row">
-    <div class="col-12 col-lg-10">
-        <h1 class="h2 pt-4">Conference Presentation</h1>
+<div class="row philosophy-page">
+    <div class="col-lg-3 col-md-4">
+        {% include widgets/profile_card_mini.html %}
+    </div>
+    <div class="col-lg-9 col-md-8">
+        <section class="philosophy-intro mb-4" aria-labelledby="philosophy-heading">
+            <div class="philosophy-hero">
+                <div class="philosophy-hero-copy">
+                    <span class="philosophy-rule" aria-hidden="true"></span>
+                    <h1 id="philosophy-heading">Philosophy</h1>
+                    <p>Loneliness, romantic loss,<br>and the pursuit of wholeness</p>
+                </div>
+                <a class="philosophy-photo-credit" href="https://commons.wikimedia.org/wiki/File:Jacques_Lacan_during_an_interview_1969.jpg">Jacques Lacan, 1969 &middot; Foto Moisio</a>
+            </div>
+            <div class="philosophy-bio">
+                <p class="mb-0">
+                    Alongside my work in robotics, I maintain an interest in philosophy.
+                    I received my B.A. in Philosophy from Nankai University.
+                    This page brings together my philosophical talks and reflections.
+                </p>
+            </div>
+        </section>
+
+        <section class="philosophy-talks" aria-labelledby="talks-heading">
+        <h2 id="talks-heading" class="h4 mb-3">Conference Presentation</h2>
         {% for year in talks_by_year %}
-        <h2 class="pt-4" id="year-{{ year.name }}">{{ year.name }}</h2>
+        <h3 class="philosophy-year" id="year-{{ year.name }}">{{ year.name }}</h3>
         <div class="my-0 p-0 bg-white shadow-sm rounded-xl">
             {% for item in year.items %}
                 {% include widgets/publication_item.html item=item hide_bottom_border=forloop.last first=forloop.first last=forloop.last %}
             {% endfor %}
         </div>
         {% endfor %}
-    </div>
-
-    <div class="col-2 d-none d-lg-block">
-        <div id="navbar-year" class="nav nav-pills flex-column sticky-top" style="top: 80px">
-            {% for year in talks_by_year %}
-            <a class="nav-link d-block" href="#year-{{ year.name }}">{{ year.name }}</a>
-            {% endfor %}
-        </div>
+        </section>
     </div>
 </div>

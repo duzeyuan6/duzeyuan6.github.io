@@ -1,0 +1,41 @@
+body[data-page="philosophy"] {
+    background: #f0eee8 !important;
+    color: #292b28;
+}
+.philosophy-page { padding-top: 0.5rem; padding-bottom: 3rem; }
+.philosophy-intro { overflow: hidden; border-radius: 0.8rem; box-shadow: 0 8px 28px rgba(40, 36, 28, 0.07); }
+.philosophy-hero {
+    position: relative;
+    min-height: 330px;
+    display: flex;
+    align-items: center;
+    background-color: #222622;
+    background-image: linear-gradient(90deg, #222622 0%, #222622 36%, rgba(34, 38, 34, 0.92) 48%, rgba(34, 38, 34, 0.12) 76%), url('../images/photos/jacques-lacan-1969.jpg');
+    background-size: 100% 100%, auto 125%;
+    background-position: center, right 22%;
+    background-repeat: no-repeat;
+    color: #f7f3e9;
+}
+.philosophy-hero-copy { position: relative; width: 66%; padding: 2.5rem; }
+.philosophy-rule { display: block; width: 38px; height: 2px; margin-bottom: 1.6rem; background: #c1aa80; }
+.philosophy-hero h1 { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; font-size: clamp(2.4rem, 4.4vw, 3.65rem); letter-spacing: -0.035em; margin-bottom: 1.1rem; }
+.philosophy-hero-copy p { font-size: 1rem; line-height: 1.75; color: #e5dfd2; margin: 0; }
+.philosophy-photo-credit { position: absolute; right: 1rem; bottom: 0.8rem; max-width: calc(100% - 2rem); padding: 0.25rem 0.45rem; background: rgba(20, 23, 20, 0.8); color: #eee9df; font-size: 0.65rem; letter-spacing: 0.025em; }
+.philosophy-photo-credit:hover, .philosophy-photo-credit:focus { color: #fff; }
+.philosophy-bio { background: #faf8f2; padding: 1.75rem 2.5rem; line-height: 1.8; border-top: 1px solid #c1aa80; }
+.philosophy-talks { padding-top: 0.75rem; }
+.philosophy-talks > h2 { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; font-size: 1.65rem; }
+.philosophy-year { display: flex; align-items: center; gap: 1rem; font-size: 0.85rem; letter-spacing: 0.12em; color: #66645e; margin: 1.5rem 0 0.8rem; }
+.philosophy-year::after { content: ''; height: 1px; flex: 1; background: #d6d1c6; }
+.philosophy-talks .bubble-visual-hash { filter: grayscale(1); opacity: 0.55; }
+@media (max-width: 991.98px) {
+    .philosophy-hero-copy { padding: 1.75rem; width: 80%; }
+    .philosophy-bio { padding: 1.5rem 1.75rem; }
+}
+@media (max-width: 767.98px) {
+    .philosophy-page > div:first-child { margin-bottom: 1.5rem; }
+    .philosophy-hero { min-height: 310px; background-size: 100% 100%, auto 115%; background-image: linear-gradient(90deg, #222622 0%, rgba(34, 38, 34, 0.94) 24%, rgba(34, 38, 34, 0.65) 57%, rgba(34, 38, 34, 0.08) 100%), url('../images/photos/jacques-lacan-1969.jpg'); }
+    .philosophy-hero-copy { width: 100%; padding: 1.75rem 1.25rem 3.5rem; }
+    .philosophy-hero-copy p { font-size: 0.9rem; }
+    .philosophy-bio { padding: 1.5rem 1.25rem; }
+}
