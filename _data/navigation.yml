@@ -6,6 +6,9 @@ pages:
 
 - name: Publications
   url: /publications
+
+- name: Philosophy
+  url: /philosophy/
 #- name: Blog
  # url: /blog
 #- name: Showcase
