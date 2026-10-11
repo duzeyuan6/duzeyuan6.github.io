@@ -17,11 +17,9 @@ body[data-page="philosophy"] {
     color: #f7f3e9;
 }
 .philosophy-hero-copy { position: relative; width: 66%; padding: 2.5rem; }
-.philosophy-rule { display: block; width: 38px; height: 2px; margin-bottom: 1.6rem; background: #c1aa80; }
-.philosophy-hero h1 { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; font-size: clamp(2.4rem, 4.4vw, 3.65rem); letter-spacing: -0.035em; margin-bottom: 1.1rem; }
-.philosophy-hero-copy p { font-size: 1rem; line-height: 1.75; color: #e5dfd2; margin: 0; }
-.philosophy-photo-credit { position: absolute; right: 1rem; bottom: 0.8rem; max-width: calc(100% - 2rem); padding: 0.25rem 0.45rem; background: rgba(20, 23, 20, 0.8); color: #eee9df; font-size: 0.65rem; letter-spacing: 0.025em; }
-.philosophy-photo-credit:hover, .philosophy-photo-credit:focus { color: #fff; }
+.philosophy-hero h1 { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; font-size: clamp(2.4rem, 4.4vw, 3.65rem); letter-spacing: -0.035em; margin: 0; }
+.philosophy-image-source { text-align: right; margin: 1.5rem 0 0; font-size: 0.65rem; letter-spacing: 0.025em; }
+.philosophy-image-source a { color: #66645e; }
 .philosophy-bio { background: #faf8f2; padding: 1.75rem 2.5rem; line-height: 1.8; border-top: 1px solid #c1aa80; }
 .philosophy-talks { padding-top: 0.75rem; }
 .philosophy-talks > h2 { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; font-size: 1.65rem; }
@@ -35,7 +33,6 @@ body[data-page="philosophy"] {
 @media (max-width: 767.98px) {
     .philosophy-page > div:first-child { margin-bottom: 1.5rem; }
     .philosophy-hero { min-height: 310px; background-size: 100% 100%, auto 115%; background-image: linear-gradient(90deg, #222622 0%, rgba(34, 38, 34, 0.94) 24%, rgba(34, 38, 34, 0.65) 57%, rgba(34, 38, 34, 0.08) 100%), url('../images/photos/jacques-lacan-1969.jpg'); }
-    .philosophy-hero-copy { width: 100%; padding: 1.75rem 1.25rem 3.5rem; }
-    .philosophy-hero-copy p { font-size: 0.9rem; }
+    .philosophy-hero-copy { width: 100%; padding: 1.75rem 1.25rem; }
     .philosophy-bio { padding: 1.5rem 1.25rem; }
 }
