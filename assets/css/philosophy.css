@@ -17,6 +17,7 @@ body[data-page="philosophy"] {
     color: #f7f3e9;
 }
 .philosophy-hero-copy { position: relative; width: 66%; padding: 2.5rem; }
+.philosophy-image-source { text-align: right; margin: 1.5rem 0 0; font-size: 0.65rem; letter-spacing: 0.025em; color: #66645e; }
 .philosophy-hero h1 { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; font-size: clamp(2rem, 3.5vw, 3rem); letter-spacing: -0.035em; margin: 0; }
 .philosophy-bio { background: #faf8f2; padding: 1.75rem 2.5rem; line-height: 1.8; border-top: 1px solid #c1aa80; }
 .philosophy-talks { padding-top: 0.75rem; }
