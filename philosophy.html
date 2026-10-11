@@ -1,7 +1,7 @@
 ---
 layout: default
-title: Philosophy
-navbar_title: Philosophy
+title: Philosophia
+navbar_title: Philosophia
 permalink: /philosophy/
 stylesheet: /assets/css/philosophy.css
 body_attr: 'data-page="philosophy"'
@@ -17,7 +17,7 @@ body_attr: 'data-page="philosophy"'
         <section class="philosophy-intro mb-4" aria-labelledby="philosophy-heading">
             <div class="philosophy-hero">
                 <div class="philosophy-hero-copy">
-                    <h1 id="philosophy-heading">Philosophy</h1>
+                    <h1 id="philosophy-heading">Philosophia</h1>
                 </div>
             </div>
             <div class="philosophy-bio">
@@ -35,7 +35,7 @@ body_attr: 'data-page="philosophy"'
         <h3 class="philosophy-year" id="year-{{ year.name }}">{{ year.name }}</h3>
         <div class="my-0 p-0 bg-white shadow-sm rounded-xl">
             {% for item in year.items %}
-                {% include widgets/publication_item.html item=item hide_bottom_border=forloop.last first=forloop.first last=forloop.last %}
+                {% include widgets/publication_item.html item=item hide_bottom_border=forloop.last first=forloop.first last=forloop.last show_mobile_cover=true %}
             {% endfor %}
         </div>
         {% endfor %}
