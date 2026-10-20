@@ -35,7 +35,7 @@ body_attr: 'data-page="philosophy"'
         <h3 class="philosophy-year" id="year-{{ year.name }}">{{ year.name }}</h3>
         <div class="my-0 p-0 bg-white shadow-sm rounded-xl">
             {% for item in year.items %}
-                {% include widgets/publication_item.html item=item hide_bottom_border=forloop.last first=forloop.first last=forloop.last show_mobile_cover=true %}
+                {% include widgets/publication_item.html item=item hide_bottom_border=forloop.last first=forloop.first last=forloop.last show_mobile_cover=true stack_pub_details=true %}
             {% endfor %}
         </div>
         {% endfor %}
