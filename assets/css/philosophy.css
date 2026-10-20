@@ -11,8 +11,8 @@ body[data-page="philosophy"] {
     align-items: center;
     background-color: #222622;
     background-image: linear-gradient(90deg, #222622 0%, #222622 36%, rgba(34, 38, 34, 0.92) 48%, rgba(34, 38, 34, 0.12) 76%), url('../images/photos/jacques-lacan-1969.jpg');
-    background-size: 100% 100%, auto 330px;
-    background-position: center, right 22%;
+    background-size: 100% 100%, auto 100%;
+    background-position: center, right center;
     background-repeat: no-repeat;
     color: #f7f3e9;
 }
@@ -25,13 +25,16 @@ body[data-page="philosophy"] {
 .philosophy-year { display: flex; align-items: center; gap: 1rem; font-size: 0.85rem; letter-spacing: 0.12em; color: #66645e; margin: 1.5rem 0 0.8rem; }
 .philosophy-year::after { content: ''; height: 1px; flex: 1; background: #d6d1c6; }
 .philosophy-talks .bubble-visual-hash { filter: grayscale(1); opacity: 0.55; }
+@media (min-width: 768px) {
+    .philosophy-talks .col-md-3 > img { margin-top: 0.75rem; }
+}
 @media (max-width: 991.98px) {
     .philosophy-hero-copy { padding: 1.75rem; width: 80%; }
     .philosophy-bio { padding: 1.5rem 1.75rem; }
 }
 @media (max-width: 767.98px) {
     .philosophy-page > div:first-child { margin-bottom: 1.5rem; }
-    .philosophy-hero { min-height: 190px; background-size: 100% 100%, auto 300px; background-image: linear-gradient(90deg, #222622 0%, rgba(34, 38, 34, 0.94) 24%, rgba(34, 38, 34, 0.65) 57%, rgba(34, 38, 34, 0.08) 100%), url('../images/photos/jacques-lacan-1969.jpg'); }
+    .philosophy-hero { min-height: 190px; background-image: linear-gradient(90deg, #222622 0%, rgba(34, 38, 34, 0.94) 24%, rgba(34, 38, 34, 0.65) 57%, rgba(34, 38, 34, 0.08) 100%), url('../images/photos/jacques-lacan-1969.jpg'); }
     .philosophy-hero-copy { width: 100%; padding: 1.75rem 1.25rem; }
     .philosophy-bio { padding: 1.5rem 1.25rem; }
 }
